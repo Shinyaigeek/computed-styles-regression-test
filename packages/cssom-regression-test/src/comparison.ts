@@ -108,7 +108,7 @@ function compareElements(
     const childDifferences = compareElements(
       expected.children[i],
       actual.children[i],
-      `${path}.children[${i}]`,
+      `${path} > ${expected.children[i].uniqueSelector}`,
       options
     )
     differences.push(...childDifferences)

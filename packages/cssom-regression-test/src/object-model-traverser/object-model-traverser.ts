@@ -6,6 +6,7 @@ import { UnknownError } from '../error'
 export interface ObjectModelTraverser {
   getDocument(): Promise<Result<Protocol.CommandReturnValues['DOM.getDocument'], Error>>
   querySelectorAll(
+    nodeId: number,
     selector: string
   ): Promise<Result<Protocol.CommandReturnValues['DOM.querySelectorAll'], Error>>
   describeNode(
@@ -39,9 +40,9 @@ export class ObjectModelTraverserByCDP implements ObjectModelTraverser {
     return result
   }
 
-  async querySelectorAll(selector: string) {
+  async querySelectorAll(nodeId: number, selector: string) {
     const result = await this.cdp.send('DOM.querySelectorAll', {
-      nodeId: 1,
+      nodeId,
       selector,
     })
     return result
@@ -50,6 +51,8 @@ export class ObjectModelTraverserByCDP implements ObjectModelTraverser {
   async describeNode(nodeId: number) {
     const result = await this.cdp.send('DOM.describeNode', {
       nodeId,
+      pierce: true,
+      depth: -1,
     })
     return result
   }

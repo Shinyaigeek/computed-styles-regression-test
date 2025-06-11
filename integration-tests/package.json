@@ -15,6 +15,7 @@
   },
   "scripts": {
     "test": "playwright test",
+    "test:update": "playwright test --update-snapshots",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "serve": "static-server ./fixtures -p 8080"

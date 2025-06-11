@@ -11,7 +11,7 @@ test.describe('Snapshot', () => {
 
       const snapshot = await captureSnapshot(page)
 
-      expect(JSON.stringify(snapshot)).toMatchSnapshot()
+      expect(JSON.stringify(snapshot)).toMatchSnapshot(`${target}.json`)
     })
   }
 })

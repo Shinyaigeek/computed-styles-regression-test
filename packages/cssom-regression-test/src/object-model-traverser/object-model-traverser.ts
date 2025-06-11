@@ -1,7 +1,7 @@
-import { createErr, createOk, type Result } from 'option-t/esm/plain_result'
+import { createErr, createOk, type Result } from 'option-t/plain_result'
 import type { Protocol } from 'playwright-core/types/protocol'
-import type { CDPSession } from '../infrastructure/cdp'
-import { UnknownError } from '../error'
+import type { CDPSession } from '../infrastructure/cdp.js'
+import { UnknownError } from '../error.js'
 
 export interface ObjectModelTraverser {
   getDocument(): Promise<Result<Protocol.CommandReturnValues['DOM.getDocument'], Error>>

@@ -1,7 +1,7 @@
 import type { Page, CDPSession as PlaywrightCDPSession } from 'playwright'
 import type { Protocol } from 'playwright-core/types/protocol'
-import { createErr, createOk, type Result } from 'option-t/esm/plain_result'
-import { UnknownError } from '../error'
+import { createErr, createOk, type Result } from 'option-t/plain_result'
+import { UnknownError } from '../error.js'
 
 export interface CDPSession {
   start(): Promise<void>

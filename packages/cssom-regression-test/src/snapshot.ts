@@ -1,8 +1,8 @@
 import type { Page } from 'playwright-core'
-import { CDPSessionByPlaywright } from './infrastructure/cdp'
-import { ObjectModelTraverserByCDP } from './object-model-traverser/object-model-traverser'
-import { isErr, unwrapErr, unwrapOk } from 'option-t/esm/plain_result'
-import { type CSSOMElementNode, traverseElement } from './node'
+import { CDPSessionByPlaywright } from './infrastructure/cdp.js'
+import { ObjectModelTraverserByCDP } from './object-model-traverser/object-model-traverser.js'
+import { isErr, unwrapErr, unwrapOk } from 'option-t/plain_result'
+import { type CSSOMElementNode, traverseElement } from './node.js'
 
 export interface CSSOMSnapshot {
   url: string
@@ -18,6 +18,7 @@ export const captureSnapshot = async (
 ): Promise<CSSOMSnapshot> => {
   const { selector = 'body', includeChildren = true } = options
   const cdpSession = new CDPSessionByPlaywright(page)
+  await cdpSession.start()
 
   try {
     const traverserResult = await ObjectModelTraverserByCDP.initialize(cdpSession)

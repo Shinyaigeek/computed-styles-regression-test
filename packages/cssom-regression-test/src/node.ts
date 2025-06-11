@@ -1,13 +1,7 @@
-import {
-  createErr,
-  createOk,
-  unwrapOk,
-  isErr,
-  type Result,
-  unwrapErr,
-} from 'option-t/esm/plain_result'
-import type { ObjectModelTraverser } from './object-model-traverser/object-model-traverser'
+import { createErr, createOk, unwrapOk, isErr, type Result, unwrapErr } from 'option-t/plain_result'
+import type { ObjectModelTraverser } from './object-model-traverser/object-model-traverser.js'
 import type { Protocol } from 'playwright-core/types/protocol'
+import { isNotNull } from 'option-t/nullable/nullable'
 
 export type CSSOMStyleValue = Record<string, string>
 
@@ -73,11 +67,17 @@ export async function traverseElement(
 
   const childrenResults =
     options.includeChildren && node.children
-      ? await Promise.all(
-          node.children.map(async (child, index) => {
-            return traverseElement(traverser, child.nodeId, index, { includeChildren: true })
-          })
-        )
+      ? (
+          await Promise.all(
+            node.children.map(async (child, index) => {
+              if (child.nodeType !== 1) {
+                return null
+              }
+
+              return traverseElement(traverser, child.nodeId, index, { includeChildren: true })
+            })
+          )
+        ).filter(isNotNull)
       : []
 
   const errors = childrenResults.filter(isErr)

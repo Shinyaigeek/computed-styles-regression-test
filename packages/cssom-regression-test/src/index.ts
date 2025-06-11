@@ -1,2 +1,2 @@
-export * from './comparison'
-export * from './snapshot'
+export * from './comparison.js'
+export * from './snapshot.js'

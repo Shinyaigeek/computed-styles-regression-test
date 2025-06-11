@@ -1,5 +1,5 @@
-import type { CSSOMElementNode } from './node'
-import type { CSSOMSnapshot } from './snapshot'
+import type { CSSOMElementNode } from './node.js'
+import type { CSSOMSnapshot } from './snapshot.js'
 
 export interface ComparisonResult {
   isEqual: boolean

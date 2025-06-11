@@ -6,6 +6,10 @@ import { UnknownError } from '../error'
 export interface CDPSession {
   start(): Promise<void>
   finish(): Promise<Result<void, Error>>
+  send<T extends keyof Protocol.CommandParameters>(
+    method: T,
+    params: Protocol.CommandParameters[T]
+  ): Promise<Result<Protocol.CommandReturnValues[T], Error>>
 }
 
 export class CDPSessionNotFoundError extends Error {
@@ -33,10 +37,7 @@ export class CDPSessionByPlaywright implements CDPSession {
     return createOk(undefined)
   }
 
-  private async send<T extends keyof Protocol.CommandParameters>(
-    method: T,
-    params: Protocol.CommandParameters[T]
-  ): Promise<Result<Protocol.CommandReturnValues[T], Error>> {
+  async send(method, params) {
     if (!this.session) {
       return createErr(new CDPSessionNotFoundError())
     }

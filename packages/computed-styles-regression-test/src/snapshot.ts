@@ -37,7 +37,6 @@ export const captureSnapshot = async (
     if (includePseudoStates) {
       pseudoStatesMap = await detectElementsWithPseudoStates(page, selector)
     }
-    console.log(pseudoStatesMap)
 
     const traverserResult = await ObjectModelTraverserByCDP.initialize(cdpSession)
 
@@ -68,7 +67,6 @@ export const captureSnapshot = async (
       throw new Error(`No elements found for selector: ${selector}`)
     }
 
-    console.log('pseudoStatesMap', pseudoStatesMap)
     const treeResults = await Promise.all(
       nodeIds.map(async (nodeId) => {
         const element = await traverseElement(traverser, nodeId, 0, {

@@ -176,7 +176,6 @@ export async function traverseElement(
   const pseudoStates: Record<string, CSSOMStyleValue> = {}
   if (options.pseudoStatesMap && options.pseudoStatesMap[uniqueSelector]) {
     for (const pseudoState of options.pseudoStatesMap[uniqueSelector]) {
-      console.log(uniqueSelector, pseudoState)
       const pseudoStylesResult = await getComputedStylesWithPseudoState(
         traverser,
         nodeId,

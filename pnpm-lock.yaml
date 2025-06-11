@@ -23,9 +23,9 @@ importers:
 
   examples/basic:
     dependencies:
-      cssom-regression-test:
+      computed-styles-regression-test:
         specifier: workspace:*
-        version: link:../../packages/cssom-regression-test
+        version: link:../../packages/computed-styles-regression-test
     devDependencies:
       '@playwright/test':
         specifier: ^1.40.0
@@ -42,9 +42,9 @@ importers:
 
   integration-tests:
     dependencies:
-      cssom-regression-test:
+      computed-styles-regression-test:
         specifier: workspace:*
-        version: link:../packages/cssom-regression-test
+        version: link:../packages/computed-styles-regression-test
       static-server:
         specifier: ^2.2.1
         version: 2.2.1
@@ -56,7 +56,7 @@ importers:
         specifier: ^20.0.0
         version: 20.19.0
 
-  packages/cssom-regression-test:
+  packages/computed-styles-regression-test:
     dependencies:
       option-t:
         specifier: ^53.0.0

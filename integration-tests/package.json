@@ -6,7 +6,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "cssom-regression-test": "workspace:*",
+    "computed-styles-regression-test": "workspace:*",
     "static-server": "^2.2.1"
   },
   "devDependencies": {

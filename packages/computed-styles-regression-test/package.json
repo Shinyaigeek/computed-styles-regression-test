@@ -1,5 +1,5 @@
 {
-  "name": "cssom-regression-test",
+  "name": "computed-styles-regression-test",
   "version": "0.0.1",
   "description": "DOM & CSSOM based regression testing utility",
   "main": "dist/index.js",

@@ -12,7 +12,7 @@
     "test:ui": "playwright test --ui"
   },
   "dependencies": {
-    "cssom-regression-test": "workspace:*"
+    "computed-styles-regression-test": "workspace:*"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

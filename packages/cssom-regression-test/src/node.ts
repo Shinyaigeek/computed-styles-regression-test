@@ -12,6 +12,7 @@ import type { Protocol } from 'playwright-core/types/protocol'
 export type CSSOMStyleValue = Record<string, string>
 
 export interface CSSOMElementNode {
+  nodeName: string
   uniqueSelector: string
   computedStyles: CSSOMStyleValue
   children: CSSOMElementNode[]
@@ -93,6 +94,7 @@ export async function traverseElement(
   const uniqueSelector = generateUniqueSelector(node, siblingIndex)
 
   return createOk({
+    nodeName: node.nodeName,
     uniqueSelector,
     computedStyles: unwrapOk(computedStylesResult),
     children,

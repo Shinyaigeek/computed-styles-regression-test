@@ -15,6 +15,10 @@ export interface ObjectModelTraverser {
   getComputedStyleForNode(
     nodeId: number
   ): Promise<Result<Protocol.CommandReturnValues['CSS.getComputedStyleForNode'], Error>>
+  getMatchedStylesForNode(
+    nodeId: number
+  ): Promise<Result<Protocol.CommandReturnValues['CSS.getMatchedStylesForNode'], Error>>
+  forcePseudoState(nodeId: number, forcedPseudoClasses: string[]): Promise<Result<void, Error>>
 }
 
 export class ObjectModelTraverserByCDP implements ObjectModelTraverser {
@@ -62,5 +66,24 @@ export class ObjectModelTraverserByCDP implements ObjectModelTraverser {
       nodeId,
     })
     return result
+  }
+
+  async getMatchedStylesForNode(nodeId: number) {
+    const result = await this.cdp.send('CSS.getMatchedStylesForNode', {
+      nodeId,
+    })
+    return result
+  }
+
+  async forcePseudoState(nodeId: number, forcedPseudoClasses: string[]) {
+    try {
+      await this.cdp.send('CSS.forcePseudoState', {
+        nodeId,
+        forcedPseudoClasses,
+      })
+      return createOk(undefined)
+    } catch (error) {
+      return createErr(new UnknownError(error))
+    }
   }
 }

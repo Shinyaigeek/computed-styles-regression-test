@@ -91,6 +91,60 @@ function compareElements(
     }
   }
 
+  // Compare pseudo-states
+  const expectedPseudoStates = expected.pseudoStates || {}
+  const actualPseudoStates = actual.pseudoStates || {}
+
+  const allPseudoStates = new Set([
+    ...Object.keys(expectedPseudoStates),
+    ...Object.keys(actualPseudoStates),
+  ])
+
+  for (const pseudoState of allPseudoStates) {
+    const expectedPseudo = expectedPseudoStates[pseudoState]
+    const actualPseudo = actualPseudoStates[pseudoState]
+
+    if (!expectedPseudo && actualPseudo) {
+      differences.push({
+        type: 'style',
+        path: `${path}:${pseudoState}`,
+        expected: undefined,
+        actual: 'present',
+        description: `Unexpected pseudo-state ${pseudoState} at ${path}`,
+      })
+    } else if (expectedPseudo && !actualPseudo) {
+      differences.push({
+        type: 'style',
+        path: `${path}:${pseudoState}`,
+        expected: 'present',
+        actual: undefined,
+        description: `Missing pseudo-state ${pseudoState} at ${path}`,
+      })
+    } else if (expectedPseudo && actualPseudo) {
+      // Compare the styles within the pseudo-state
+      const expectedPseudoStylesMap = new Map(Object.entries(expectedPseudo))
+      const actualPseudoStylesMap = new Map(Object.entries(actualPseudo))
+
+      const pseudoStylesToCheck =
+        options.styleProperties || Array.from(expectedPseudoStylesMap.keys())
+
+      for (const property of pseudoStylesToCheck) {
+        const expectedPseudoValue = expectedPseudoStylesMap.get(property)
+        const actualPseudoValue = actualPseudoStylesMap.get(property)
+
+        if (expectedPseudoValue !== actualPseudoValue) {
+          differences.push({
+            type: 'style',
+            path: `${path}:${pseudoState}.styles.${property}`,
+            expected: expectedPseudoValue,
+            actual: actualPseudoValue,
+            description: `Pseudo-state ${pseudoState} style property ${property} mismatch at ${path}`,
+          })
+        }
+      }
+    }
+  }
+
   // Compare children count if strict structure comparison
   if (options.strictStructureComparison && expected.children.length !== actual.children.length) {
     differences.push({

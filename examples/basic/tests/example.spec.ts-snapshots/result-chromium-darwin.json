@@ -3,297 +3,17 @@
     "differences": [
         {
             "type": "style",
-            "path": "trees[0].styles.block-size",
-            "expected": "1717.03px",
-            "actual": "1715.03px",
-            "description": "Style property block-size mismatch at trees[0]"
-        },
-        {
-            "type": "style",
-            "path": "trees[0].styles.height",
-            "expected": "1717.03px",
-            "actual": "1715.03px",
-            "description": "Style property height mismatch at trees[0]"
-        },
-        {
-            "type": "style",
-            "path": "trees[0].styles.perspective-origin",
-            "expected": "640px 858.516px",
-            "actual": "640px 857.516px",
-            "description": "Style property perspective-origin mismatch at trees[0]"
-        },
-        {
-            "type": "style",
-            "path": "trees[0].styles.transform-origin",
-            "expected": "640px 858.516px",
-            "actual": "640px 857.516px",
-            "description": "Style property transform-origin mismatch at trees[0]"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0.styles.block-size",
-            "expected": "145.594px",
-            "actual": "143.594px",
-            "description": "Style property block-size mismatch at trees[0] > header@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0.styles.height",
-            "expected": "145.594px",
-            "actual": "143.594px",
-            "description": "Style property height mismatch at trees[0] > header@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0.styles.perspective-origin",
-            "expected": "640px 72.7969px",
-            "actual": "640px 71.7969px",
-            "description": "Style property perspective-origin mismatch at trees[0] > header@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0.styles.transform-origin",
-            "expected": "640px 72.7969px",
-            "actual": "640px 71.7969px",
-            "description": "Style property transform-origin mismatch at trees[0] > header@0"
-        },
-        {
-            "type": "style",
             "path": "trees[0] > header@0 > h1.title@0.styles.color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
+            "expected": "white",
+            "actual": "red",
             "description": "Style property color mismatch at trees[0] > header@0 > h1.title@0"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-block-end-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-block-end-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-block-start-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-block-start-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-bottom-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-bottom-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-inline-end-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-inline-end-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-inline-start-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-inline-start-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-left-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-left-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-right-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-right-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.border-top-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-top-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.caret-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property caret-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.column-rule-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property column-rule-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.outline-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property outline-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.text-decoration-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property text-decoration-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.text-emphasis-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property text-emphasis-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.-webkit-text-fill-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property -webkit-text-fill-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > h1.title@0.styles.-webkit-text-stroke-color",
-            "expected": "rgb(255, 255, 255)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property -webkit-text-stroke-color mismatch at trees[0] > header@0 > h1.title@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1.styles.block-size",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property block-size mismatch at trees[0] > header@0 > nav@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1.styles.height",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property height mismatch at trees[0] > header@0 > nav@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1.styles.perspective-origin",
-            "expected": "640px 16.7969px",
-            "actual": "640px 15.7969px",
-            "description": "Style property perspective-origin mismatch at trees[0] > header@0 > nav@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1.styles.transform-origin",
-            "expected": "640px 16.7969px",
-            "actual": "640px 15.7969px",
-            "description": "Style property transform-origin mismatch at trees[0] > header@0 > nav@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0.styles.block-size",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property block-size mismatch at trees[0] > header@0 > nav@1 > ul@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0.styles.height",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property height mismatch at trees[0] > header@0 > nav@1 > ul@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0.styles.perspective-origin",
-            "expected": "640px 16.7969px",
-            "actual": "640px 15.7969px",
-            "description": "Style property perspective-origin mismatch at trees[0] > header@0 > nav@1 > ul@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0.styles.transform-origin",
-            "expected": "640px 16.7969px",
-            "actual": "640px 15.7969px",
-            "description": "Style property transform-origin mismatch at trees[0] > header@0 > nav@1 > ul@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.block-size",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property block-size mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.height",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property height mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.inline-size",
-            "expected": "51.6562px",
-            "actual": "49.6562px",
-            "description": "Style property inline-size mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-block-end",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-block-end mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-block-start",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-block-start mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-bottom",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-bottom mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-inline-end",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-inline-end mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-inline-start",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-inline-start mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-left",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-left mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-right",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-right mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
+            "description": "Style property padding mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
         },
         {
             "type": "style",
@@ -304,94 +24,31 @@
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.perspective-origin",
-            "expected": "25.8281px 16.7969px",
-            "actual": "24.8281px 15.7969px",
-            "description": "Style property perspective-origin mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.transform-origin",
-            "expected": "25.8281px 16.7969px",
-            "actual": "24.8281px 15.7969px",
-            "description": "Style property transform-origin mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.width",
-            "expected": "51.6562px",
-            "actual": "49.6562px",
-            "description": "Style property width mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.block-size",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property block-size mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.height",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property height mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.inline-size",
-            "expected": "70.1094px",
-            "actual": "68.1094px",
-            "description": "Style property inline-size mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-block-end",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-right",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-block-end mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
+            "description": "Style property padding-right mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-block-start",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-bottom",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-block-start mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
+            "description": "Style property padding-bottom mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-bottom",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@0.styles.padding-left",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-bottom mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
+            "description": "Style property padding-left mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@0"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-inline-end",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-inline-end mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-inline-start",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-inline-start mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-left",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-left mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-right",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-right mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
+            "description": "Style property padding mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
         },
         {
             "type": "style",
@@ -402,94 +59,31 @@
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.perspective-origin",
-            "expected": "35.0469px 16.7969px",
-            "actual": "34.0469px 15.7969px",
-            "description": "Style property perspective-origin mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.transform-origin",
-            "expected": "35.0547px 16.7969px",
-            "actual": "34.0547px 15.7969px",
-            "description": "Style property transform-origin mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.width",
-            "expected": "70.1094px",
-            "actual": "68.1094px",
-            "description": "Style property width mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.block-size",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property block-size mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.height",
-            "expected": "33.5938px",
-            "actual": "31.5938px",
-            "description": "Style property height mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.inline-size",
-            "expected": "65.625px",
-            "actual": "63.625px",
-            "description": "Style property inline-size mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-block-end",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-right",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-block-end mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
+            "description": "Style property padding-right mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-block-start",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-bottom",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-block-start mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
+            "description": "Style property padding-bottom mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-bottom",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@1.styles.padding-left",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-bottom mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
+            "description": "Style property padding-left mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@1"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-inline-end",
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding",
             "expected": "4px",
             "actual": "3px",
-            "description": "Style property padding-inline-end mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-inline-start",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-inline-start mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-left",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-left mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-right",
-            "expected": "4px",
-            "actual": "3px",
-            "description": "Style property padding-right mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
+            "description": "Style property padding mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
         },
         {
             "type": "style",
@@ -500,150 +94,45 @@
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.perspective-origin",
-            "expected": "32.8125px 16.7969px",
-            "actual": "31.8125px 15.7969px",
-            "description": "Style property perspective-origin mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-right",
+            "expected": "4px",
+            "actual": "3px",
+            "description": "Style property padding-right mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.transform-origin",
-            "expected": "32.8125px 16.7969px",
-            "actual": "31.8125px 15.7969px",
-            "description": "Style property transform-origin mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-bottom",
+            "expected": "4px",
+            "actual": "3px",
+            "description": "Style property padding-bottom mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.width",
-            "expected": "65.625px",
-            "actual": "63.625px",
-            "description": "Style property width mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2.styles.inset-block-start",
-            "expected": "145.594px",
-            "actual": "143.594px",
-            "description": "Style property inset-block-start mismatch at trees[0] > header@0 > div.hover-box@2"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2.styles.top",
-            "expected": "145.594px",
-            "actual": "143.594px",
-            "description": "Style property top mismatch at trees[0] > header@0 > div.hover-box@2"
+            "path": "trees[0] > header@0 > nav@1 > ul@0 > li@2.styles.padding-left",
+            "expected": "4px",
+            "actual": "3px",
+            "description": "Style property padding-left mismatch at trees[0] > header@0 > nav@1 > ul@0 > li@2"
         },
         {
             "type": "style",
             "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.color",
             "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
+            "actual": "red",
             "description": "Style property color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-block-end-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-block-end-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
+            "path": "trees[0] > main@1 > section#hero@0 > button@2:hover.styles.background-color",
+            "expected": "rgb(41, 128, 185)",
+            "actual": "yellow",
+            "description": "Pseudo-state hover style property background-color mismatch at trees[0] > main@1 > section#hero@0 > button@2"
         },
         {
             "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-block-start-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-block-start-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-bottom-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-bottom-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-inline-end-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-inline-end-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-inline-start-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-inline-start-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-left-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-left-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-right-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-right-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.border-top-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property border-top-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.caret-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property caret-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.column-rule-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property column-rule-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.outline-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property outline-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.text-decoration-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property text-decoration-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.text-emphasis-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property text-emphasis-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.-webkit-text-fill-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property -webkit-text-fill-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
-        },
-        {
-            "type": "style",
-            "path": "trees[0] > header@0 > div.hover-box@2 > h3@0.styles.-webkit-text-stroke-color",
-            "expected": "rgb(44, 62, 80)",
-            "actual": "rgb(255, 0, 0)",
-            "description": "Style property -webkit-text-stroke-color mismatch at trees[0] > header@0 > div.hover-box@2 > h3@0"
+            "path": "trees[0] > main@1 > section#contact@3 > form@1 > button@3:hover.styles.background-color",
+            "expected": "rgb(41, 128, 185)",
+            "actual": "yellow",
+            "description": "Pseudo-state hover style property background-color mismatch at trees[0] > main@1 > section#contact@3 > form@1 > button@3"
         }
     ]
 }

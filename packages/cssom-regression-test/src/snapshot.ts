@@ -4,6 +4,16 @@ import { ObjectModelTraverserByCDP } from './object-model-traverser/object-model
 import { isErr, unwrapErr, unwrapOk } from 'option-t/plain_result'
 import { type CSSOMElementNode, traverseElement } from './node.js'
 
+const PSEUDO_CLASSES = [
+  'hover',
+  'focus',
+  'active',
+  'focus-within',
+  'focus-visible',
+  'target',
+] as const
+type PseudoClass = (typeof PSEUDO_CLASSES)[number]
+
 export interface CSSOMSnapshot {
   url: string
   trees: CSSOMElementNode[]
@@ -14,13 +24,21 @@ export const captureSnapshot = async (
   options: {
     selector?: string
     includeChildren?: boolean
+    includePseudoStates?: boolean
   } = {}
 ): Promise<CSSOMSnapshot> => {
-  const { selector = 'body', includeChildren = true } = options
+  const { selector = 'body', includeChildren = true, includePseudoStates = true } = options
   const cdpSession = new CDPSessionByPlaywright(page)
   await cdpSession.start()
 
   try {
+    // Detect pseudo-states if requested
+    let pseudoStatesMap: Record<string, PseudoClass[]> = {}
+    if (includePseudoStates) {
+      pseudoStatesMap = await detectElementsWithPseudoStates(page, selector)
+    }
+    console.log(pseudoStatesMap)
+
     const traverserResult = await ObjectModelTraverserByCDP.initialize(cdpSession)
 
     if (isErr(traverserResult)) {
@@ -50,9 +68,13 @@ export const captureSnapshot = async (
       throw new Error(`No elements found for selector: ${selector}`)
     }
 
+    console.log('pseudoStatesMap', pseudoStatesMap)
     const treeResults = await Promise.all(
       nodeIds.map(async (nodeId) => {
-        const element = await traverseElement(traverser, nodeId, 0, { includeChildren })
+        const element = await traverseElement(traverser, nodeId, 0, {
+          includeChildren,
+          pseudoStatesMap,
+        })
         return element
       })
     )
@@ -75,4 +97,130 @@ export const captureSnapshot = async (
   } finally {
     await cdpSession.finish()
   }
+}
+
+/**
+ * Detect elements that have pseudo-class styles defined in CSS
+ */
+const detectElementsWithPseudoStates = async (
+  page: Page,
+  selector: string
+): Promise<Record<string, PseudoClass[]>> => {
+  return await page.evaluate(
+    (args) => {
+      const { selector, pseudoClasses } = args
+      const elementPseudoStates = new Map<string, string[]>()
+
+      try {
+        // Get all elements within the selector scope
+        const rootElements = document.querySelectorAll(selector)
+        const allElements: Element[] = []
+
+        for (let k = 0; k < rootElements.length; k++) {
+          const root = rootElements[k]
+          allElements.push(root)
+          const descendants = root.querySelectorAll('*')
+          for (let l = 0; l < descendants.length; l++) {
+            allElements.push(descendants[l])
+          }
+        }
+
+        // Check each stylesheet for pseudo-class rules
+        for (let i = 0; i < document.styleSheets.length; i++) {
+          const stylesheet = document.styleSheets[i]
+          try {
+            // Skip external stylesheets that might cause CORS issues
+            if (stylesheet.href && !stylesheet.href.startsWith(window.location.origin)) {
+              continue
+            }
+
+            const rules = stylesheet.cssRules
+            if (!rules) continue
+
+            for (let j = 0; j < rules.length; j++) {
+              const rule = rules[j]
+              if (rule instanceof CSSStyleRule) {
+                const selectorText = rule.selectorText
+
+                // Check if the selector contains any pseudo-classes
+                for (const pseudoClass of pseudoClasses) {
+                  if (selectorText.includes(`:${pseudoClass}`)) {
+                    // Extract the base selector (remove pseudo-classes)
+                    const baseSelector = selectorText
+                      .replace(new RegExp(`:${pseudoClass}[^,\\s]*`, 'g'), '')
+                      .replace(/::?[a-zA-Z-]+/g, '') // Remove other pseudo-elements
+                      .replace(/\s*,\s*/g, ',')
+                      .split(',')
+                      .map((s) => s.trim())
+                      .filter((s) => s.length > 0)
+                      .filter((s) => !s.match(/^[+~>]|[+~>]$/)) // Remove combinators
+
+                    // Check which elements match the base selector
+                    for (const base of baseSelector) {
+                      if (!base || base.includes(':')) continue
+
+                      try {
+                        const matchingElements = Array.from(allElements).filter((el) =>
+                          el.matches(base)
+                        )
+
+                        for (const element of matchingElements) {
+                          // Generate a unique identifier for the element
+                          const uniqueId = generateElementIdentifier(element)
+
+                          if (!elementPseudoStates.has(uniqueId)) {
+                            elementPseudoStates.set(uniqueId, [])
+                          }
+
+                          const states = elementPseudoStates.get(uniqueId)!
+                          if (!states.includes(pseudoClass)) {
+                            states.push(pseudoClass)
+                          }
+                        }
+                      } catch (e) {
+                        // Skip invalid selectors
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            // Skip stylesheets that can't be accessed
+          }
+        }
+      } catch (e) {
+        console.warn('Error detecting pseudo-states:', e)
+      }
+
+      const result: Record<string, PseudoClass[]> = {}
+      for (const [key, value] of elementPseudoStates) {
+        result[key] = value.filter((v) => pseudoClasses.includes(v as any)) as PseudoClass[]
+      }
+      return result
+
+      function generateElementIdentifier(element: Element): string {
+        const parts = [element.tagName.toLowerCase()]
+
+        if (element.id) {
+          parts.push(`#${element.id}`)
+        }
+
+        if (element.className) {
+          const classes = element.className.split(/\s+/).filter((c) => c.length > 0)
+          if (classes.length > 0) {
+            parts.push(`.${classes.join('.')}`)
+          }
+        }
+
+        // Add position among siblings for uniqueness
+        const siblings = Array.from(element.parentElement?.children || [])
+        const index = siblings.indexOf(element)
+        parts.push(`@${index}`)
+
+        return parts.join('')
+      }
+    },
+    { selector, pseudoClasses: PSEUDO_CLASSES }
+  )
 }

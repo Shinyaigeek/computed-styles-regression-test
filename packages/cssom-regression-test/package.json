@@ -1,17 +1,28 @@
 {
   "name": "cssom-regression-test",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "DOM & CSSOM based regression testing utility",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write ."
   },
   "dependencies": {
     "option-t": "^53.0.0",
     "playwright": "catalog:",
     "playwright-core": "catalog:"
   },
-  "keywords": [],
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "@playwright/test": "^1.40.0"
+  },
+  "keywords": ["playwright", "cssom", "regression-testing", "dom"],
   "author": "",
   "license": "ISC"
 }

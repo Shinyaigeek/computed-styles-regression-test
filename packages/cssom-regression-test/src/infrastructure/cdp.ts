@@ -1,6 +1,6 @@
 import type { Page, CDPSession as PlaywrightCDPSession } from 'playwright'
 import type { Protocol } from 'playwright-core/types/protocol'
-import { createErr, createOk, type Result } from 'option-t/plain_result'
+import { createErr, createOk, type Result } from 'option-t/esm/plain_result'
 import { UnknownError } from '../error'
 
 export interface CDPSession {
@@ -37,7 +37,10 @@ export class CDPSessionByPlaywright implements CDPSession {
     return createOk(undefined)
   }
 
-  async send(method, params) {
+  async send<T extends keyof Protocol.CommandParameters>(
+    method: T,
+    params: Protocol.CommandParameters[T]
+  ): Promise<Result<Protocol.CommandReturnValues[T], Error>> {
     if (!this.session) {
       return createErr(new CDPSessionNotFoundError())
     }

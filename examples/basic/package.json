@@ -1,0 +1,25 @@
+{
+  "name": "basic",
+  "version": "1.0.0",
+  "description": "Basic example for CSSOM regression testing",
+  "main": "index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "static-server ./src -p 3000",
+    "serve": "static-server ./src -p 3000",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "dependencies": {
+    "cssom-regression-test": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "static-server": "^2.2.1"
+  },
+  "keywords": ["cssom", "regression-test", "example"],
+  "author": "",
+  "license": "ISC"
+}

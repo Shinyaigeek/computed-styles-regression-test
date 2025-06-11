@@ -1,0 +1,25 @@
+{
+  "name": "integration-tests",
+  "version": "1.0.0",
+  "description": "Integration tests for CSSOM regression testing utility",
+  "main": "index.js",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "cssom-regression-test": "workspace:*",
+    "static-server": "^2.2.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "serve": "static-server ./fixtures -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -138,25 +138,10 @@ async function clearForcedPseudoState(
 }
 
 /**
- * Check if an attribute should be excluded based on exclude patterns
- * Supports wildcards like 'data-*', 'aria-*'
+ * Check if an attribute should be excluded
  */
 function shouldExcludeAttribute(attributeName: string, excludePatterns: string[]): boolean {
-  for (const pattern of excludePatterns) {
-    if (pattern.endsWith('*')) {
-      // Wildcard pattern: 'data-*' matches 'data-session-id', 'data-user-id', etc.
-      const prefix = pattern.slice(0, -1)
-      if (attributeName.startsWith(prefix)) {
-        return true
-      }
-    } else {
-      // Exact match
-      if (attributeName === pattern) {
-        return true
-      }
-    }
-  }
-  return false
+  return excludePatterns.includes(attributeName)
 }
 
 export async function traverseElement(

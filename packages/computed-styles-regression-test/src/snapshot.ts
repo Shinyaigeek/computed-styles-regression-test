@@ -26,7 +26,6 @@ export interface CaptureSnapshotOptions {
   /**
    * Attributes to exclude from snapshot.
    * Useful for excluding sensitive data (tokens, session IDs) from being saved.
-   * Supports wildcards: ['data-*', 'aria-*']
    * Example: ['data-session-id', 'data-user-token']
    */
   excludeAttributes?: string[]

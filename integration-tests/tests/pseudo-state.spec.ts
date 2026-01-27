@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { captureSnapshot, compareSnapshots } from 'cssom-regression-test'
+import { captureSnapshot, compareSnapshots } from 'computed-styles-regression-test'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
 

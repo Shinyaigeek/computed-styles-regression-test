@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { captureSnapshot, compareSnapshots } from "cssom-regression-test";
+import { captureSnapshot, compareSnapshots } from "computed-styles-regression-test";
 
 test.describe('Example', () => {
   test('should be able to navigate to the page', async ({ page }) => {

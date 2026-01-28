@@ -7,7 +7,7 @@ This is playwright based utility module to compare compare computed stylesheets(
 
 ```ts
 import { expect, test } from "@playwright/test";
-import { captureSnapshot, compareSnapshots } from "cssom-regression-test";
+import { captureSnapshot, compareSnapshots } from "computed-styles-regression-test";
 
 test.describe("~~~", () => {
     test("~~~", async ({ page }) => {

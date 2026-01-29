@@ -19,6 +19,35 @@ export interface ComparisonOptions {
   ignoreInlineStyles?: boolean
   strictStructureComparison?: boolean
   styleProperties?: string[]
+  /**
+   * Attributes to exclude from comparison.
+   * Can be an array of attribute names or a function that returns true for attributes to exclude.
+   * Useful for ignoring dynamic attributes (src, href, session IDs, etc.)
+   * Example: ['src', 'href', 'data-session-id']
+   * Example: (name) => name.startsWith('data-')
+   */
+  excludeAttributes?: string[] | ((attributeName: string) => boolean)
+  /**
+   * Element types (tag names) to exclude from comparison.
+   * Can be an array of tag names or a function that returns true for elements to exclude.
+   * Useful for excluding elements irrelevant to computed styles.
+   * Example: ['script', 'noscript', 'meta']
+   * Example: (tagName) => tagName.toLowerCase() === 'script'
+   */
+  excludeElements?: string[] | ((tagName: string) => boolean)
+}
+
+/**
+ * Check if an attribute should be excluded
+ */
+function shouldExcludeAttribute(
+  attributeName: string,
+  excludePatterns: string[] | ((attributeName: string) => boolean)
+): boolean {
+  if (typeof excludePatterns === 'function') {
+    return excludePatterns(attributeName)
+  }
+  return excludePatterns.includes(attributeName)
 }
 
 function compareElements(
@@ -44,8 +73,14 @@ function compareElements(
   if (!options.ignoreClassNames) {
     const expectedAttrs = { ...expected.attributes }
     const actualAttrs = { ...actual.attributes }
+    const excludePatterns = options.excludeAttributes || []
 
     for (const [key, value] of Object.entries(expectedAttrs)) {
+      // Skip excluded attributes
+      if (excludePatterns && shouldExcludeAttribute(key, excludePatterns)) {
+        continue
+      }
+
       if (actualAttrs[key] !== value) {
         differences.push({
           type: 'structure',
@@ -59,6 +94,11 @@ function compareElements(
 
     for (const key of Object.keys(actualAttrs)) {
       if (!(key in expectedAttrs)) {
+        // Skip excluded attributes
+        if (excludePatterns && shouldExcludeAttribute(key, excludePatterns)) {
+          continue
+        }
+
         differences.push({
           type: 'structure',
           path: `${path}.attributes.${key}`,
@@ -157,12 +197,27 @@ function compareElements(
   }
 
   // Compare children recursively
-  const minChildrenLength = Math.min(expected.children.length, actual.children.length)
+  // Filter out excluded element types
+  const excludeElementPatterns = options.excludeElements
+  const shouldExcludeElement = (child: CSSOMElementNode) => {
+    if (!excludeElementPatterns) {
+      return false
+    }
+    if (typeof excludeElementPatterns === 'function') {
+      return excludeElementPatterns(child.nodeName)
+    }
+    return excludeElementPatterns.map(tag => tag.toUpperCase()).includes(child.nodeName.toUpperCase())
+  }
+
+  const expectedChildren = expected.children.filter(child => !shouldExcludeElement(child))
+  const actualChildren = actual.children.filter(child => !shouldExcludeElement(child))
+
+  const minChildrenLength = Math.min(expectedChildren.length, actualChildren.length)
   for (let i = 0; i < minChildrenLength; i++) {
     const childDifferences = compareElements(
-      expected.children[i],
-      actual.children[i],
-      `${path} > ${expected.children[i].uniqueSelector}`,
+      expectedChildren[i],
+      actualChildren[i],
+      `${path} > ${expectedChildren[i].uniqueSelector}`,
       options
     )
     differences.push(...childDifferences)

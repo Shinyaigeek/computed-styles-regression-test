@@ -137,6 +137,19 @@ async function clearForcedPseudoState(
   }
 }
 
+/**
+ * Check if an attribute should be excluded
+ */
+function shouldExcludeAttribute(
+  attributeName: string,
+  excludePatterns: string[] | ((attributeName: string) => boolean)
+): boolean {
+  if (typeof excludePatterns === 'function') {
+    return excludePatterns(attributeName)
+  }
+  return excludePatterns.includes(attributeName)
+}
+
 export async function traverseElement(
   traverser: ObjectModelTraverser,
   nodeId: number,
@@ -144,6 +157,8 @@ export async function traverseElement(
   options: {
     includeChildren: boolean
     pseudoStatesMap?: Record<string, string[]>
+    excludeAttributes?: string[] | ((attributeName: string) => boolean)
+    excludeElements?: string[] | ((tagName: string) => boolean)
   }
 ): Promise<Result<CSSOMElementNode, Error>> {
   const describeNodeResult = await traverser.describeNode(nodeId)
@@ -159,11 +174,16 @@ export async function traverseElement(
   }
 
   const attributes: Record<string, string> = {}
+  const excludePatterns = options.excludeAttributes
   if (node.attributes) {
     for (let i = 0; i < node.attributes.length; i += 2) {
       const name = node.attributes[i]
       const value = node.attributes[i + 1] || ''
-      attributes[name] = value
+
+      // Skip excluded attributes
+      if (!excludePatterns || !shouldExcludeAttribute(name, excludePatterns)) {
+        attributes[name] = value
+      }
     }
   }
 
@@ -196,9 +216,22 @@ export async function traverseElement(
                 return null
               }
 
+              // Check if this element type should be excluded
+              if (child.nodeName && options.excludeElements) {
+                const shouldExclude = typeof options.excludeElements === 'function'
+                  ? options.excludeElements(child.nodeName)
+                  : options.excludeElements.map(tag => tag.toUpperCase()).includes(child.nodeName.toUpperCase())
+
+                if (shouldExclude) {
+                  return null
+                }
+              }
+
               return traverseElement(traverser, child.nodeId, index, {
                 includeChildren: true,
                 pseudoStatesMap: options.pseudoStatesMap,
+                excludeAttributes: options.excludeAttributes,
+                excludeElements: options.excludeElements,
               })
             })
           )

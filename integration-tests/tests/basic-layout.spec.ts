@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import assert from 'node:assert'
-import { captureSnapshot, compareSnapshots, type CSSOMSnapshot } from 'cssom-regression-test'
+import { captureSnapshot, compareSnapshots, type CSSOMSnapshot } from 'computed-styles-regression-test'
 
 test.describe('Basic Layout CSSOM Tests', () => {
   let baselineSnapshot: CSSOMSnapshot

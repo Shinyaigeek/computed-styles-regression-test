@@ -19,15 +19,39 @@ export interface CSSOMSnapshot {
   trees: CSSOMElementNode[]
 }
 
+export interface CaptureSnapshotOptions {
+  selector?: string
+  includeChildren?: boolean
+  includePseudoStates?: boolean
+  /**
+   * Attributes to exclude from snapshot.
+   * Can be an array of attribute names or a function that returns true for attributes to exclude.
+   * Useful for excluding sensitive data (tokens, session IDs) from being saved.
+   * Example: ['data-session-id', 'data-user-token']
+   * Example: (name) => name.startsWith('data-session-')
+   */
+  excludeAttributes?: string[] | ((attributeName: string) => boolean)
+  /**
+   * Element types (tag names) to exclude from snapshot.
+   * Can be an array of tag names or a function that returns true for elements to exclude.
+   * Useful for excluding elements irrelevant to computed styles.
+   * Example: ['script', 'noscript', 'meta']
+   * Example: (tagName) => tagName.toLowerCase() === 'script'
+   */
+  excludeElements?: string[] | ((tagName: string) => boolean)
+}
+
 export const captureSnapshot = async (
   page: Page,
-  options: {
-    selector?: string
-    includeChildren?: boolean
-    includePseudoStates?: boolean
-  } = {}
+  options: CaptureSnapshotOptions = {}
 ): Promise<CSSOMSnapshot> => {
-  const { selector = 'body', includeChildren = true, includePseudoStates = true } = options
+  const {
+    selector = 'body',
+    includeChildren = true,
+    includePseudoStates = true,
+    excludeAttributes = [],
+    excludeElements = []
+  } = options
   const cdpSession = new CDPSessionByPlaywright(page)
   await cdpSession.start()
 
@@ -72,6 +96,8 @@ export const captureSnapshot = async (
         const element = await traverseElement(traverser, nodeId, 0, {
           includeChildren,
           pseudoStatesMap,
+          excludeAttributes,
+          excludeElements,
         })
         return element
       })

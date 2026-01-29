@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { captureSnapshot } from 'cssom-regression-test'
+import { captureSnapshot } from 'computed-styles-regression-test'
 
 test.describe('Snapshot', () => {
   const targets = ['basic-layout.html', 'flexbox-grid.html']

@@ -25,16 +25,20 @@ export interface CaptureSnapshotOptions {
   includePseudoStates?: boolean
   /**
    * Attributes to exclude from snapshot.
+   * Can be an array of attribute names or a function that returns true for attributes to exclude.
    * Useful for excluding sensitive data (tokens, session IDs) from being saved.
    * Example: ['data-session-id', 'data-user-token']
+   * Example: (name) => name.startsWith('data-session-')
    */
-  excludeAttributes?: string[]
+  excludeAttributes?: string[] | ((attributeName: string) => boolean)
   /**
    * Element types (tag names) to exclude from snapshot.
+   * Can be an array of tag names or a function that returns true for elements to exclude.
    * Useful for excluding elements irrelevant to computed styles.
    * Example: ['script', 'noscript', 'meta']
+   * Example: (tagName) => tagName.toLowerCase() === 'script'
    */
-  excludeElements?: string[]
+  excludeElements?: string[] | ((tagName: string) => boolean)
 }
 
 export const captureSnapshot = async (

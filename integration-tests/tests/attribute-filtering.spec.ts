@@ -177,4 +177,100 @@ test.describe('Attribute Filtering', () => {
     const srcDiff = result.differences.find(d => d.path.includes('src'))
     expect(srcDiff).toBeUndefined()
   })
+
+  test('should exclude attributes using function predicate', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div data-session="abc123" data-user="user456" id="main">Content</div>
+          <img data-token="secret" src="image.jpg" alt="image" />
+        </body>
+      </html>
+    `)
+
+    const snapshot1 = await captureSnapshot(page)
+
+    // Change all data-* attributes
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div data-session="xyz789" data-user="user999" id="main">Content</div>
+          <img data-token="newsecret" src="image.jpg" alt="image" />
+        </body>
+      </html>
+    `)
+
+    const snapshot2 = await captureSnapshot(page)
+
+    // Without filter, should detect difference
+    const resultWithoutFilter = compareSnapshots(snapshot1, snapshot2)
+    expect(resultWithoutFilter.isEqual).toBe(false)
+
+    // With function predicate to exclude all data-* attributes
+    const resultWithFilter = compareSnapshots(snapshot1, snapshot2, {
+      excludeAttributes: (name) => name.startsWith('data-'),
+    })
+    expect(resultWithFilter.isEqual).toBe(true)
+  })
+
+  test('should exclude attributes using complex function predicate', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <a href="https://example.com" data-track="123" aria-label="Link">Link</a>
+          <div src="test.jpg" data-id="456">Content</div>
+        </body>
+      </html>
+    `)
+
+    const snapshot1 = await captureSnapshot(page)
+
+    // Change href, src, and data-* attributes
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <a href="https://different.com" data-track="789" aria-label="Link">Link</a>
+          <div src="other.jpg" data-id="999">Content</div>
+        </body>
+      </html>
+    `)
+
+    const snapshot2 = await captureSnapshot(page)
+
+    // Exclude using regex pattern
+    const result = compareSnapshots(snapshot1, snapshot2, {
+      excludeAttributes: (name) => /^(data-|src|href)/.test(name),
+    })
+
+    expect(result.isEqual).toBe(true)
+  })
+
+  test('should exclude attributes at capture time using function', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div data-token="secret123" data-session="abc" aria-label="Content">Content</div>
+        </body>
+      </html>
+    `)
+
+    // Exclude all data-* attributes at capture time
+    const snapshot = await captureSnapshot(page, {
+      excludeAttributes: (name) => name.startsWith('data-'),
+    })
+
+    const divElement = snapshot.trees[0].children.find(
+      (child) => child.nodeName === 'DIV'
+    )
+
+    expect(divElement).toBeDefined()
+    expect(divElement?.attributes['data-token']).toBeUndefined()
+    expect(divElement?.attributes['data-session']).toBeUndefined()
+    expect(divElement?.attributes['aria-label']).toBe('Content')
+  })
 })

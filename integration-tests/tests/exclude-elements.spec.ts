@@ -221,4 +221,139 @@ test.describe('Exclude Elements', () => {
 
     expect(result.isEqual).toBe(true)
   })
+
+  test('should exclude elements using function predicate', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div>Content</div>
+          <script src="app.js"></script>
+          <noscript>Enable JS</noscript>
+          <style>body { color: red; }</style>
+        </body>
+      </html>
+    `)
+
+    const snapshot = await captureSnapshot(page, {
+      excludeElements: (tagName) => ['SCRIPT', 'NOSCRIPT', 'STYLE'].includes(tagName.toUpperCase())
+    })
+
+    const bodyElement = snapshot.trees[0]
+    const excludedElements = bodyElement.children.filter(
+      (child) => ['SCRIPT', 'NOSCRIPT', 'STYLE'].includes(child.nodeName)
+    )
+
+    expect(excludedElements).toHaveLength(0)
+
+    // Verify div is still there
+    const divElements = bodyElement.children.filter(
+      (child) => child.nodeName === 'DIV'
+    )
+    expect(divElements).toHaveLength(1)
+  })
+
+  test('should exclude elements using pattern matching function', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div>Content</div>
+          <script src="app.js"></script>
+          <noscript>Enable JS</noscript>
+        </body>
+      </html>
+    `)
+
+    const snapshot1 = await captureSnapshot(page)
+
+    // Change script content
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div>Content</div>
+          <script src="app-v2.js"></script>
+          <noscript>Please enable JS</noscript>
+        </body>
+      </html>
+    `)
+
+    const snapshot2 = await captureSnapshot(page)
+
+    // Exclude using case-insensitive matching
+    const result = compareSnapshots(snapshot1, snapshot2, {
+      excludeElements: (tagName) => /^(script|noscript)$/i.test(tagName)
+    })
+
+    expect(result.isEqual).toBe(true)
+  })
+
+  test('should exclude elements at capture time using function', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div>Content</div>
+          <script src="analytics.js"></script>
+          <script src="tracking.js"></script>
+          <noscript>Enable JS</noscript>
+        </body>
+      </html>
+    `)
+
+    const snapshot = await captureSnapshot(page, {
+      excludeElements: (tagName) => tagName.toLowerCase() === 'script'
+    })
+
+    const bodyElement = snapshot.trees[0]
+
+    // Verify scripts are excluded
+    const scriptElements = bodyElement.children.filter(
+      (child) => child.nodeName === 'SCRIPT'
+    )
+    expect(scriptElements).toHaveLength(0)
+
+    // Verify noscript is still there
+    const noscriptElements = bodyElement.children.filter(
+      (child) => child.nodeName === 'NOSCRIPT'
+    )
+    expect(noscriptElements).toHaveLength(1)
+  })
+
+  test('should combine function predicates for both attributes and elements', async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div data-session="abc123">Content</div>
+          <script src="app.js"></script>
+          <img data-track="pixel" src="image.jpg" />
+        </body>
+      </html>
+    `)
+
+    const snapshot1 = await captureSnapshot(page)
+
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div data-session="xyz789">Content</div>
+          <script src="app-v2.js"></script>
+          <img data-track="newpixel" src="different.jpg" />
+        </body>
+      </html>
+    `)
+
+    const snapshot2 = await captureSnapshot(page)
+
+    // Use function predicates for both
+    const result = compareSnapshots(snapshot1, snapshot2, {
+      excludeElements: (tagName) => tagName.toLowerCase() === 'script',
+      excludeAttributes: (name) => name.startsWith('data-') || name === 'src'
+    })
+
+    expect(result.isEqual).toBe(true)
+  })
 })
